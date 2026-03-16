@@ -1,0 +1,123 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account information and career preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "careerInterests": { "type": "array", "items": { "type": "string" } },
+        "bio": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName", "email"]
+    },
+    "Article": {
+      "title": "Career Article",
+      "description": "Articles recommended by AI or posted by experts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "category": { "type": "string" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "aiAnalysis": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content", "category"]
+    },
+    "Product": {
+      "title": "Career Product",
+      "description": "Career-related books or tools for sale",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "imageUrl": { "type": "string" },
+        "sellerId": { "type": "string" },
+        "sellerName": { "type": "string" },
+        "category": { "type": "string" },
+        "stock": { "type": "integer" },
+        "logisticsStatus": { "type": "string", "enum": ["pending", "shipped", "delivered"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "price", "sellerId"]
+    },
+    "Message": {
+      "title": "Chat Message",
+      "description": "Real-time messages between users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "text": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "roomId": { "type": "string" }
+      },
+      "required": ["senderId", "text", "roomId"]
+    },
+    "ChatRoom": {
+      "title": "Chat Room",
+      "description": "Conversation between two users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "participants": { "type": "array", "items": { "type": "string" } },
+        "lastMessage": { "type": "string" },
+        "lastTimestamp": { "type": "string", "format": "date-time" },
+        "order": { "type": "integer" }
+      },
+      "required": ["participants"]
+    },
+    "CareerRule": {
+      "title": "Career Rule Base",
+      "description": "Rules for AI matching and recommendations",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ruleName": { "type": "string" },
+        "condition": { "type": "string" },
+        "recommendation": { "type": "string" },
+        "weight": { "type": "number" }
+      },
+      "required": ["ruleName", "condition"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/articles/{articleId}": {
+      "schema": "Article",
+      "description": "Career articles collection"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Marketplace items"
+    },
+    "/chatRooms/{roomId}": {
+      "schema": "ChatRoom",
+      "description": "Conversation metadata"
+    },
+    "/chatRooms/{roomId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Messages within a chat room"
+    },
+    "/careerRules/{ruleId}": {
+      "schema": "CareerRule",
+      "description": "Rule base for AI logic"
+    }
+  }
+}

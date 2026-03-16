@@ -1,0 +1,9 @@
+{
+  "name": "Copy of Copy of CareerAI - 基于大模型的个性化职业推荐与规划APP",
+  "description": "一款结合大语言模型技术的个性化职业规划与社交交易平台，支持职业文章推荐、书籍交易及实时沟通。",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
